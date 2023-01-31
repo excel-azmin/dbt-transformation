@@ -2,6 +2,6 @@
 version: 2
 
 models:
-  - name: item
+  - name: airbyte_tables
     description: "A starter dbt model"
  

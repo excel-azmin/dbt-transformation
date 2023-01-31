@@ -1,8 +1,7 @@
 
+{{ config(materialized='table') }}
 
-  create  table "postgres".public."item__dbt_tmp"
-  as (
-    
+
 with __dbt__cte__item_ab1 as (
 
 -- SQL model to parse JSON blob stored in a single column and extract into separated field columns as described by the JSON Schema
@@ -404,4 +403,3 @@ select
 from __dbt__cte__item_ab3
 -- item from "postgres".public._airbyte_raw_item
 where 1 = 1
-  );
