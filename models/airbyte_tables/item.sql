@@ -9,6 +9,8 @@ with __dbt__cte__item_ab1 as (
 select
     jsonb_extract_path_text(_airbyte_data, 'name') as "name",
     jsonb_extract_path(_airbyte_data, 'uoms') as uoms,
+    jsonb_extract_path(_airbyte_data, 'uoms') ->> 'uoms_name' as uoms_name,
+    jsonb_extract_path(_airbyte_data, 'uoms') ->> 'modified_by' as uoms_item_modified_by,
     jsonb_extract_path_text(_airbyte_data, 'uuid') as uuid,
     jsonb_extract_path_text(_airbyte_data, 'brand') as brand,
     jsonb_extract_path_text(_airbyte_data, 'image') as image,
@@ -107,6 +109,8 @@ select
     
     cast("name" as text) as "name",
     uoms,
+    uoms_name,
+    uoms_item_modified_by,
     cast(uuid as text) as uuid,
     cast(brand as text) as brand,
     cast(image as text) as image,
@@ -299,7 +303,9 @@ where 1 = 1
 -- depends_on: __dbt__cte__item_ab3
 select
     "name",
-    uoms,
+    jsonb_array_elements(uoms) ->> 'uom' uoms,
+    jsonb_array_elements(uoms) ->> 'name' uoms_name,
+    jsonb_array_elements(uoms) ->> 'modified_by' uoms_item_modified_by,
     uuid,
     brand,
     image,
