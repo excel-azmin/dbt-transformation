@@ -7,9 +7,6 @@ with __dbt__cte__item_ab1 as (
 -- SQL model to parse JSON blob stored in a single column and extract into separated field columns as described by the JSON Schema
 -- depends_on: "postgres".public._airbyte_raw_item
 select
-    jsonb_extract_path_text(_airbyte_data, '_id') as _id,
-    jsonb_extract_path_text(_airbyte_data, 'idx') as idx,
-    jsonb_extract_path_text(_airbyte_data, 'mrp') as mrp,
     jsonb_extract_path_text(_airbyte_data, 'name') as "name",
     jsonb_extract_path(_airbyte_data, 'uoms') as uoms,
     jsonb_extract_path_text(_airbyte_data, 'uuid') as uuid,
@@ -107,13 +104,7 @@ where 1 = 1
 -- SQL model to cast each column to its adequate SQL type converted from the JSON schema type
 -- depends_on: __dbt__cte__item_ab1
 select
-    cast(_id as text) as _id,
-    cast(idx as 
-    float
-) as idx,
-    cast(mrp as 
-    float
-) as mrp,
+    
     cast("name" as text) as "name",
     uoms,
     cast(uuid as text) as uuid,
@@ -307,9 +298,6 @@ where 1 = 1
 )-- Final base SQL model
 -- depends_on: __dbt__cte__item_ab3
 select
-    _id,
-    idx,
-    mrp,
     "name",
     uoms,
     uuid,
