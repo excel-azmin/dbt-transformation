@@ -1,0 +1,7 @@
+
+version: 2
+
+models:
+  - name: item
+    description: "A starter dbt model"
+ 
