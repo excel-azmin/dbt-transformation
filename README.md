@@ -1,5 +1,7 @@
 Welcome to your new dbt project!
 
+dbt installation [Wiki](https://docs.getdbt.com/docs/core/pip-install)
+
 ### Using the starter project
 
 Try running the following commands:
